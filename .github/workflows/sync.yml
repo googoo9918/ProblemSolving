@@ -1,0 +1,28 @@
+name: Sync to Second Repo
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout r  with:
+          persist-credentials: false
+
+    epository
+        uses: actions/checkout@v2
+        - name: Setup Git
+        run: |
+          git config --global user.name 'googoo9918'
+          git config --global user.email '1013as@.com'
+      
+      - name: Add second remote
+        run: git remote add second https://${{ secrets.PERSONAL_ACCESS_TOKEN }}@/github.com/OneDay-OneAlgorithm/JungDongGyu.git
+
+      - name: Push to second
+        run: git push second main
+
