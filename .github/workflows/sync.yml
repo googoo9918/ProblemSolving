@@ -28,7 +28,15 @@ jobs:
 
       - name: Rebase onto second/main
         run: git rebase second/main
-      
+     
+      - name: Remove Github Actions workflow directory
+        run: rm -rf .github
+
+      - name: commit changes
+        run: |
+          git add .
+          git commit -m "Remove .github directory before push to second"
+
       - name: Push to second
         run: git push second main --force-with-lease
 
