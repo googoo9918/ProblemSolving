@@ -19,23 +19,19 @@ jobs:
         run: |
           git config --global user.name 'googoo9918'
           git config --global user.email '1013as@.com'
+          git remote add second https://x-access-token:${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/OneDay-OneAlgorithm/JungDongGyu.git
+          git config core.sparseCheckout true
+          echo "/*" > .git/info/sparse-checkout
+          echo "!.github" >> .git/info/sparse-checkout
       
-      - name: Add second remote
-        run: git remote add second https://x-access-token:${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/OneDay-OneAlgorithm/JungDongGyu.git
-      
+      - name: Checkout spare repository
+        run: git read-tree -mu HEAD
+
       - name: Fetch from second
         run: git fetch second
 
       - name: Rebase onto second/main
-        run: git rebase second/main
-     
-      - name: Remove Github Actions workflow directory
-        run: rm -rf .github
-
-      - name: commit changes
-        run: |
-          git add .
-          git commit -m "Remove .github directory before push to second"
+        run: git rebase second/main     
 
       - name: Push to second
         run: git push second main --force-with-lease
