@@ -22,7 +22,13 @@ jobs:
       
       - name: Add second remote
         run: git remote add second https://x-access-token:${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/OneDay-OneAlgorithm/JungDongGyu.git
+      
+      - name: Fetch from second
+        run: git fetch second
 
+      - name: Rebase onto second/main
+        run: git rebase second/main
+      
       - name: Push to second
-        run: git push second main
+        run: git push second main --force-with-lease
 
