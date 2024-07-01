@@ -1,4 +1,4 @@
-name: Sync to Second
+name: Sync to Second repo
 
 on:
   push:
