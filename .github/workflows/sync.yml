@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout main branch
         uses: actions/checkout@v2
         with:
           persist-credentials: false
@@ -21,21 +21,29 @@ jobs:
           git config --global user.email '1013as@.com'
           git remote add second https://x-access-token:${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/OneDay-OneAlgorithm/JungDongGyu.git
 
-      - name: Configure sparse checkout
-        run: |
-          git config core.sparseCheckout true
-          echo "/*" > .git/info/sparse-checkout
-          echo "!github/" >> .git/info/sparse-checkout
-
-      - name: Apply sparse checkout
-        run: git read-tree -mu HEAD
-
       - name: Fetch from second
         run: git fetch second
 
-      - name: Rebase onto second/main
-        run: git rebase second/main
+      - name: Create worktree
+        run: git worktree add ../worktree HEAD
 
-      - name: Push to second
-        run: git push second main --force-with-lease
+      - name: Remove .github directory in worktree
+        run: |
+          cd ../worktree
+          rm -rf .github
+          git add .
+          git commit --amend --no-edit
+
+      - name: Rebase onto second/main from worktree
+        run: |
+          cd ../worktree
+          git rebase second/main
+
+      - name: Push to second from worktree
+        run: |
+          cd ../worktree
+          git push second HEAD:main --force-with-lease
+
+      - name: Clean up worktree
+        run: git worktree remove ../worktree
 
