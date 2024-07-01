@@ -21,8 +21,14 @@ jobs:
           git config --global user.email '1013as@.com'
           git remote add second https://x-access-token:${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/OneDay-OneAlgorithm/JungDongGyu.git
           git config core.sparseCheckout true
+          
+      - name: Configure sparse checkout
+        runt: |
+          git config core.sparseCheckout true
           echo "/*" > .git/info/sparse-checkout
           echo "!.github" >> .git/info/sparse-checkout
+          git sparse-checkout init --cone
+          git sparse-checkout set '/*' '!/.github'
       
       - name: Checkout spare repository
         run: git read-tree -mu HEAD
@@ -35,4 +41,3 @@ jobs:
 
       - name: Push to second
         run: git push second main --force-with-lease
-
