@@ -23,7 +23,7 @@ jobs:
           git config core.sparseCheckout true
           
       - name: Configure sparse checkout
-        runt: |
+        run: |
           git config core.sparseCheckout true
           echo "/*" > .git/info/sparse-checkout
           echo "!.github" >> .git/info/sparse-checkout
