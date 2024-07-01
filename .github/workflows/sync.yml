@@ -10,12 +10,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout r  with:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
           persist-credentials: false
 
-    epository
-        uses: actions/checkout@v2
-        - name: Setup Git
+      - name: Setup Git
         run: |
           git config --global user.name 'googoo9918'
           git config --global user.email '1013as@.com'
