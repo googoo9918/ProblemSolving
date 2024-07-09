@@ -1,33 +1,29 @@
 class Solution {
     public int[][] solution(int n) {
-        int[][] answer = new int[n][n];
-        int dx=0, dy=0;
-        int widthEnd=n-1, heightEnd= n-1;
-        int widthStart=0, heightStart =0;
-        int cnt = 1;
-        while(cnt<n*n){
-            if(dy<widthEnd && dx==heightStart){
-                answer[dx][dy++] = cnt++;
-                if(dy==widthEnd) heightStart++;
-            }
-            else if(dy==widthEnd && dx<heightEnd){
-                answer[dx++][dy] = cnt++;
-                if(dx == heightEnd) widthEnd--;
-            }
-            else if(dy> widthStart && dx==heightEnd){
-                answer[dx][dy--] = cnt++;
-                if(dy == widthStart) heightEnd--;
-            }
-            else if(dy==widthStart && dx>heightStart){
-                answer[dx--][dy] = cnt++;
-                if(dx == heightStart) widthStart++;
-            }
+    int[][] answer = new int[n][n];
+    int cnt = 1;
+    int x = 0, y = 0;
+    int direction = 0; 
+    
+    int[] dx = {0, 1, 0, -1};
+    int[] dy = {1, 0, -1, 0};
+    
+    while (cnt <= n * n) {
+        answer[x][y] = cnt++;
+        
+        int nx = x + dx[direction];
+        int ny = y + dy[direction];
+        
+        if (nx >= 0 && ny >= 0 && nx < n && ny < n && answer[nx][ny] == 0) {
+            x = nx;
+            y = ny;
+        } else {
+            direction = (direction + 1) % 4;
+            x += dx[direction];
+            y += dy[direction];
         }
-        for(int i=0; i<n; i++){
-            for(int j=0; j<n; j++){
-                if(answer[i][j] == 0) answer[i][j] = n*n;
-            }
-        }
-        return answer;
     }
+    
+    return answer;
+}
 }
