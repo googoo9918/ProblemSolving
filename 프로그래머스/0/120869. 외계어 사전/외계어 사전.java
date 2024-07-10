@@ -4,7 +4,7 @@ class Solution {
         for(int i=0; i<dic.length; i++){
             check = true;
             for(int j=0; j<spell.length; j++){
-                if(dic[i].indexOf(spell[j]) == -1){
+                if(!dic[i].contains(spell[j])){
                     check = false;
                     break;
                 }
