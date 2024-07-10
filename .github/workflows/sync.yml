@@ -37,7 +37,13 @@ jobs:
       - name: Rebase onto second/main from worktree
         run: |
           cd ../worktree
-          git rebase second/main
+          git rebase second/main || git rebase --abort
+
+      - name: Merge second/main from worktree
+        if: failure()
+        run: |
+          cd ../worktree
+          git merge -X ours second/main
 
       - name: Push to second from worktree
         run: |
@@ -46,4 +52,3 @@ jobs:
 
       - name: Clean up worktree
         run: git worktree remove ../worktree
-
