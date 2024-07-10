@@ -34,10 +34,10 @@ jobs:
           git add .
           git commit --amend --no-edit
 
-      - name: Merge changes from second/main into worktree
+      - name: Rebase onto second/main from worktree
         run: |
           cd ../worktree
-          git merge -X ours second/main
+          git rebase second/main
 
       - name: Push to second from worktree
         run: |
