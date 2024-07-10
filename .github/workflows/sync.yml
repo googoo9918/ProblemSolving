@@ -34,13 +34,7 @@ jobs:
           git add .
           git commit --amend --no-edit
 
-      - name: Rebase onto second/main from worktree
-        run: |
-          cd ../worktree
-          git rebase second/main || git rebase --abort
-
-      - name: Merge second/main from worktree
-        if: failure()
+      - name: Merge changes from second/main into worktree
         run: |
           cd ../worktree
           git merge -X ours second/main
