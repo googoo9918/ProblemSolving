@@ -2,17 +2,19 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 public class Main {
+  private static final int MOD = 1234567891;
+
   public void solution() throws Exception{
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     int n = Integer.parseInt(br.readLine());
     String s = br.readLine();
-    int sum = 0;
+    long sum = 0;
     for(int i=0; i<n; i++){
-      int tmp = s.charAt(i)-'a'+1;
+      long tmp = s.charAt(i)-'a'+1;
       for(int j=0; j<i; j++){
-        tmp *= 31;
+        tmp = (tmp * 31) % MOD;
       }
-      sum += tmp;
+      sum = (sum + tmp) % MOD;
     }
     System.out.println(sum);
   }
