@@ -29,9 +29,11 @@ public class Main {
         }
       );
 
+    StringBuilder sb = new StringBuilder();
     for(String s: list){
-      System.out.println(s);
+      sb.append(s).append("\n");
     }
+    System.out.println(sb);
   }
   public static void main(String[] args) throws Exception{
     new Main().solution();
