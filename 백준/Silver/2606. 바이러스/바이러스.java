@@ -15,7 +15,7 @@ public class Main {
     pairs = Integer.parseInt(br.readLine());
     isVisited = new boolean[computer+1];
     graph = new ArrayList[computer+1];
-    
+
     for(int i=1; i<=computer; i++){
       graph[i] = new ArrayList<>();
     }
@@ -28,22 +28,15 @@ public class Main {
       graph[b].add(a);
     }
 
-    System.out.println(bfs(1));
+    System.out.println(dfs(1)-1);
   }
 
-  private int bfs(int i) {
-    Queue<Integer> queue = new LinkedList<>();
-    int cnt = 0;
-    queue.add(i);
+  private int dfs(int i) {
+    int cnt = 1;
     isVisited[i] = true;
-    while (!queue.isEmpty()) {
-      int node = queue.poll();
-      for(int next : graph[node]){
-        if(!isVisited[next]){
-          isVisited[next] = true;
-          queue.add(next);
-          cnt++;
-        }
+    for(int next : graph[i]){
+      if(!isVisited[next]){
+        cnt += dfs(next);
       }
     }
     return cnt;
