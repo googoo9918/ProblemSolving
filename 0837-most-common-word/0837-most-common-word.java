@@ -10,16 +10,16 @@ class Solution {
             }
         }
 
-        String answer = "";
-        int max = 0;
-        for(Map.Entry<String, Integer> entry : map.entrySet()){
-            int tmp = entry.getValue();
-            if(tmp>max){
-                max = tmp;
-                answer = entry.getKey();
-            }
-        }
+        // String answer = "";
+        // int max = 0;
+        // for(Map.Entry<String, Integer> entry : map.entrySet()){
+        //     int tmp = entry.getValue();
+        //     if(tmp>max){
+        //         max = tmp;
+        //         answer = entry.getKey();
+        //     }
+        // }
 
-        return answer;
+        return Collections.max(map.entrySet(), Map.Entry.comparingByValue()).getKey();
     }
 }
