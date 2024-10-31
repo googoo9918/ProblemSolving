@@ -3,17 +3,14 @@ class Solution {
         Arrays.sort(nums);
         Set<List<Integer>> anss = new HashSet<>();
         for(int i=0; i<nums.length; i++){
-            int left=0, right=nums.length-1;
+            List<Integer> tmp = new ArrayList<>();
+            for(int j=0; j<nums.length; j++){
+                if(i!=j) tmp.add(nums[j]);
+            }
+
+            int left=0, right=tmp.size()-1;
             while(left<right){
-                if(left==i){
-                    left++;
-                    continue;
-                }
-                if(right==i){
-                    right--;
-                    continue;
-                }
-                int leftValue=nums[left], rightValue=nums[right];
+                int leftValue=tmp.get(left), rightValue=tmp.get(right); 
                 if(leftValue + rightValue == -nums[i]){
                     List<Integer> ans = new ArrayList<>();
                     ans.add(nums[i]);
