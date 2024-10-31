@@ -1,27 +1,31 @@
 class Solution {
     public String[] reorderLogFiles(String[] logs) {
-        List<String> llist = new ArrayList<>();
-        List<String> dlist = new ArrayList<>();
-
+        List<String> llog = new ArrayList<>();
+        List<String> dlog = new ArrayList<>();
         for(String log : logs){
-            if(Character.isLetter(log.split(" ")[1].charAt(0))){
-                llist.add(log);
-            }
-            else{
-                dlist.add(log);
+            if(Character.isLetter(log.split(" ",2)[1].charAt(0))){
+                llog.add(log);
+            }else{
+                dlog.add(log);
             }
         }
 
-        llist.sort((s1,s2) ->{
-            String[] s1x = s1.split(" ",2);
-            String[] s2x = s2.split(" ",2);
+        Collections.sort(llog, new Comparator<>(){
+            @Override
+            public int compare(String s1, String s2){
+                String[] sarr1 = s1.split(" ", 2);
+                String[] sarr2 = s2.split(" ", 2);
+                int compared = sarr1[1].compareTo(sarr2[1]);
 
-            int compared = s1x[1].compareTo(s2x[1]);
-            if(compared == 0) return s1x[0].compareTo(s2x[0]);
-            else return compared;
+                if(compared == 0){
+                    return sarr1[0].compareTo(sarr2[0]);
+                }
+
+                return compared;
+            }
         });
 
-        llist.addAll(dlist);
-        return llist.toArray(new String[0]);
+        llog.addAll(dlog);
+        return llog.toArray(new String[0]);
     }
 }
