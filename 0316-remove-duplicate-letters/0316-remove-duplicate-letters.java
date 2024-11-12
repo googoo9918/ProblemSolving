@@ -1,30 +1,42 @@
-class Solution {
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Stack;
+
+public class Solution {
     public String removeDuplicateLetters(String s) {
-        // 결국 핵심은, 순서대로 지나가면서, 어떤식으로 빼고, 어떤식으로 붙일거냐?
-        // 1. 이미 사용했는가? 2. 뒤에 더 남아있는가?
-        Map<Character, Integer> counter = new HashMap<>();
+        Map<Character, Integer> lastIndexMap = new HashMap<>();
         Map<Character, Boolean> visited = new HashMap<>();
-        Deque<Character> stack = new ArrayDeque<>();
-
-        for(char c : s.toCharArray()){
-            counter.put(c, counter.getOrDefault(c,0)+1);
+        
+        // 각 문자의 마지막 인덱스를 저장
+        for (int i = 0; i < s.length(); i++) {
+            lastIndexMap.put(s.charAt(i), i);
+            visited.put(s.charAt(i), false);
         }
-
-        for(char c : s.toCharArray()){
-            counter.put(c, counter.get(c)-1);
-            if(visited.get(c)!= null && visited.get(c)==true) continue;
-
-            while(!stack.isEmpty() && counter.get(stack.peek())>0 && stack.peek()>c){
+        
+        Stack<Character> stack = new Stack<>();
+        
+        for (int i = 0; i < s.length(); i++) {
+            char alpha = s.charAt(i);
+            
+            if (visited.get(alpha)) {
+                continue;
+            }
+            
+            // 현재 문자가 스택의 마지막 문자보다 작고, 스택의 마지막 문자가 뒤에 더 남아 있는 경우
+            while (!stack.isEmpty() && alpha < stack.peek() && i < lastIndexMap.get(stack.peek())) {
                 visited.put(stack.pop(), false);
             }
-            stack.push(c);
-            visited.put(c,true);
+            
+            stack.push(alpha);
+            visited.put(alpha, true);
         }
-
-        StringBuilder sb = new StringBuilder();
-        while(!stack.isEmpty()){
-            sb.append(stack.pollLast());
+        
+        // 스택의 문자들을 합쳐서 결과 문자열을 만듦
+        StringBuilder result = new StringBuilder();
+        for (char ch : stack) {
+            result.append(ch);
         }
-        return sb.toString();
+        
+        return result.toString();
     }
 }
