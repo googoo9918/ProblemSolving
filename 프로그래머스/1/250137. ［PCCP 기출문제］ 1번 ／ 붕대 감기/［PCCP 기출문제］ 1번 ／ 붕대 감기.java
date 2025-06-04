@@ -12,7 +12,6 @@ class Solution {
         for(int i = 1; i<=attacks[attacks.length-1][0]; i++){
             if(attacksMap.containsKey(i)){
                 currentHealth -= attacksMap.get(i);
-                System.out.println("1: " + currentHealth);
                 if(currentHealth <= 0) return -1;
                 continuous = 0;
                 continue;
@@ -23,12 +22,10 @@ class Solution {
             if(continuous == bandage[0]){
                 currentHealth = Math.min(health, currentHealth + bandage[1] + bandage[2]);
                 continuous = 0;
-                System.out.println("2: " + currentHealth);
                 continue;
             }
             
             currentHealth = Math.min(health, currentHealth + bandage[1]);
-            System.out.println("3: " + currentHealth);
         }
         
         return currentHealth;
