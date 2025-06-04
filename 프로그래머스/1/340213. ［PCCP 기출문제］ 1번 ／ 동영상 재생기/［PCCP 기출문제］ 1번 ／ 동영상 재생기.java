@@ -1,4 +1,6 @@
 import java.util.*;
+
+
 class Solution {
     public String solution(String video_len, String pos, String op_start, String op_end, String[] commands) {
         String[] posArr = pos.split(":");
@@ -12,7 +14,6 @@ class Solution {
             {
                 posArr[0] = endArr[0];
                 posArr[1] = endArr[1];
-                System.out.println("??");
             }
             
             int posH = Integer.parseInt(posArr[0]);
@@ -25,46 +26,37 @@ class Solution {
                     if(posH == videoH && posM + 10 >= videoM){
                         posArr[0] = String.valueOf(videoH);
                         posArr[1] = String.valueOf(videoM);
-                        System.out.println("1. command: " + command + "posArr[0]: " + posArr[0] + " posArr[1]: " + posArr[1]);
                         continue;
                     }
                     posArr[1] = String.valueOf(posM+10);
-                    System.out.println("2. command: " + command + "posArr[0]: " + posArr[0] + " posArr[1]: " + posArr[1]);
                 }else{
                     if(posH+1 == videoH && (posM+10)%60 >= videoM){
                         posArr[0] = String.valueOf(videoH);
                         posArr[1] = String.valueOf(videoM);
-                        System.out.println("3.command: " + command + "posArr[0]: " + posArr[0] + " posArr[1]: " + posArr[1]);
                         continue;
                     }
                     posArr[0] = String.valueOf(posH+1);
                     posArr[1] = String.valueOf((posM+10)%60);
-                    System.out.println("4.command: " + command + "posArr[0]: " + posArr[0] + " posArr[1]: " + posArr[1]);
                 }
             }else{
                 if(posM - 10 < 0){
                     if(posH == 0){
                         posArr[0] = String.valueOf(0);
                         posArr[1] = String.valueOf(0);
-                        System.out.println("5. command: " + command + "posArr[0]: " + posArr[0] + " posArr[1]: " + posArr[1]);
                         continue;
                     }
                     posArr[0] = String.valueOf(posH-1);
                     posArr[1] = String.valueOf(posM+50);
-                    System.out.println("6. command: " + command + "posArr[0]: " + posArr[0] + " posArr[1]: " + posArr[1]);
                 } else{
                     posArr[1] = String.valueOf(posM-10);
-                    System.out.println("7. command: " + command + "posArr[0]: " + posArr[0] + " posArr[1]: " + posArr[1]);
                 }
             }
             
-            if(Integer.parseInt(posArr[0]) >= Integer.parseInt(startArr[0]) &&
-               Integer.parseInt(posArr[1]) >= Integer.parseInt(startArr[1]) &&
-               Integer.parseInt(posArr[0]) <= Integer.parseInt(endArr[0]) &&
-               Integer.parseInt(posArr[1]) <= Integer.parseInt(endArr[1])){
+            if(Integer.parseInt(posArr[0]) * 60 + Integer.parseInt(posArr[1]) >= Integer.parseInt(startArr[0]) * 60 + Integer.parseInt(startArr[1]) &&
+               Integer.parseInt(posArr[0]) * 60 + Integer.parseInt(posArr[1]) <= Integer.parseInt(endArr[0]) * 60 + Integer.parseInt(endArr[1]))
+            {
                 posArr[0] = endArr[0];
                 posArr[1] = endArr[1];
-                System.out.println("??");
             }
         }
         
