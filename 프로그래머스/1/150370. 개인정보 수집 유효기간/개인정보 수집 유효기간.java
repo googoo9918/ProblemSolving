@@ -16,7 +16,7 @@ class Solution {
             if(afterPrivacy + 28*plus -1 < StringToSum(today)){
                 list.add(idx);
             }
-            System.out.println("idx: " + idx + " afterPrivacy: " + (afterPrivacy + 28*plus) + " today: " + StringToSum(today));
+            
             idx++;
         }
         
