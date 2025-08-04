@@ -1,19 +1,24 @@
+import java.util.*;
 class Solution {
     public int lengthOfLongestSubstring(String s) {
-        int left =0, right =0, ans =0;
-        Map<Character, Integer> lastIndex = new HashMap<>();
+        Queue<Character> queue = new LinkedList<>();
 
-        for(char c : s.toCharArray()){
-            if(lastIndex.containsKey(c) && left<= lastIndex.get(c)){
-                left = lastIndex.get(c)+1;
-            }else{
-                if(ans < right-left+1){
-                    ans = right-left+1;
+        int max = 0;
+        for(char c1 : s.toCharArray()){
+            if(!queue.contains(c1)){
+                queue.add(c1);
+                if(max<queue.size()){
+                    max = queue.size();
                 }
+            } else{
+                while(queue.peek() != c1){
+                    queue.poll();
+                }
+                queue.poll();
+                queue.add(c1);
             }
-            lastIndex.put(c, right++);
         }
 
-        return ans;
+        return max;
     }
 }
