@@ -17,6 +17,7 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 ## Array
 |  |
 | ------- |
+| [0200-number-of-islands](https://github.com/googoo9918/ProblemSolving/tree/master/0200-number-of-islands) |
 | [0347-top-k-frequent-elements](https://github.com/googoo9918/ProblemSolving/tree/master/0347-top-k-frequent-elements) |
 ## Divide and Conquer
 |  |
@@ -42,4 +43,20 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 |  |
 | ------- |
 | [0347-top-k-frequent-elements](https://github.com/googoo9918/ProblemSolving/tree/master/0347-top-k-frequent-elements) |
+## Depth-First Search
+|  |
+| ------- |
+| [0200-number-of-islands](https://github.com/googoo9918/ProblemSolving/tree/master/0200-number-of-islands) |
+## Breadth-First Search
+|  |
+| ------- |
+| [0200-number-of-islands](https://github.com/googoo9918/ProblemSolving/tree/master/0200-number-of-islands) |
+## Union Find
+|  |
+| ------- |
+| [0200-number-of-islands](https://github.com/googoo9918/ProblemSolving/tree/master/0200-number-of-islands) |
+## Matrix
+|  |
+| ------- |
+| [0200-number-of-islands](https://github.com/googoo9918/ProblemSolving/tree/master/0200-number-of-islands) |
 <!---LeetCode Topics End-->
