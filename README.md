@@ -19,6 +19,7 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 ## Array
 |  |
 | ------- |
+| [0046-permutations](https://github.com/googoo9918/ProblemSolving/tree/master/0046-permutations) |
 | [0200-number-of-islands](https://github.com/googoo9918/ProblemSolving/tree/master/0200-number-of-islands) |
 | [0347-top-k-frequent-elements](https://github.com/googoo9918/ProblemSolving/tree/master/0347-top-k-frequent-elements) |
 ## Divide and Conquer
@@ -65,4 +66,5 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 |  |
 | ------- |
 | [0017-letter-combinations-of-a-phone-number](https://github.com/googoo9918/ProblemSolving/tree/master/0017-letter-combinations-of-a-phone-number) |
+| [0046-permutations](https://github.com/googoo9918/ProblemSolving/tree/master/0046-permutations) |
 <!---LeetCode Topics End-->
