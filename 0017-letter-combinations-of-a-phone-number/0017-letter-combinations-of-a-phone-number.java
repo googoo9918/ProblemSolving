@@ -1,18 +1,19 @@
+import java.util.*;
 class Solution {
-    private void dfs(List<String> ans, Map<Character,String> map, String digits, int start, StringBuilder sb){
+    private void dfs(String digits, int start, Map<Character, String> map, List<String> ans, StringBuilder sb){
         if(sb.length() == digits.length()){
             ans.add(sb.toString());
             return;
         }
 
         for(char c : map.get(digits.charAt(start)).toCharArray()){
-            dfs(ans, map, digits, start+1, new StringBuilder(sb).append(c));
+            dfs(digits, start+1, map, ans, new StringBuilder(sb).append(c));
         }
     }
     public List<String> letterCombinations(String digits) {
-        List<String> ans = new ArrayList<>();
-        if(digits.length()==0) return ans;
         Map<Character, String> map = new HashMap<>();
+        List<String> ans = new ArrayList<>();
+        if(digits.length() == 0) return ans;
         map.put('2', "abc");
         map.put('3', "def");
         map.put('4', "ghi");
@@ -22,8 +23,7 @@ class Solution {
         map.put('8', "tuv");
         map.put('9', "wxyz");
 
-        dfs(ans, map, digits, 0, new StringBuilder());
-
+        dfs(digits, 0, map, ans, new StringBuilder());
         return ans;
     }
 }
