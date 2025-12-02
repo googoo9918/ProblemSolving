@@ -1,48 +1,59 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class Main {
-  int computer, pairs;
-  ArrayList<Integer>[] graph;
-  boolean[] isVisited;
-  public void solution() throws Exception{
-    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    computer = Integer.parseInt(br.readLine());
-    pairs = Integer.parseInt(br.readLine());
-    isVisited = new boolean[computer+1];
-    graph = new ArrayList[computer+1];
+    static int n, m, cnt;
+    static List<Integer>[] list;
+    static boolean[] isVisited;
 
-    for(int i=1; i<=computer; i++){
-      graph[i] = new ArrayList<>();
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        n = Integer.parseInt(br.readLine());
+        m = Integer.parseInt(br.readLine());
+        list = new ArrayList[n + 1];
+        isVisited = new boolean[n + 1];
+
+        for (int i = 0; i <= n; i++) {
+            list[i] = new ArrayList<>();
+        }
+
+        for (int i = 0; i < m; i++) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            int start = Integer.parseInt(st.nextToken());
+            int end = Integer.parseInt(st.nextToken());
+
+            list[start].add(end);
+            list[end].add(start);
+        }
+
+        bfs(1);
+
+        System.out.println(isVisit());
     }
 
-    for(int i=1; i<=pairs; i++){
-      StringTokenizer st = new StringTokenizer(br.readLine());
-      int a = Integer.parseInt(st.nextToken());
-      int b = Integer.parseInt(st.nextToken());
-      graph[a].add(b);
-      graph[b].add(a);
+    private static void bfs(int start) {
+        Queue<Integer> queue = new LinkedList<>();
+        isVisited[start] = true;
+        queue.add(start);
+
+        while (!queue.isEmpty()) {
+            int node = queue.poll();
+            for (int next : list[node]) {
+                if (!isVisited[next]) {
+                    isVisited[next] = true;
+                    queue.add(next);
+                }
+            }
+        }
     }
 
-    System.out.println(dfs(1)-1);
-  }
+    private static int isVisit(){
+        int cnt =0;
+        for (boolean b : isVisited) {
+            if(b) cnt++;
+        }
 
-  private int dfs(int i) {
-    int cnt = 1;
-    isVisited[i] = true;
-    for(int next : graph[i]){
-      if(!isVisited[next]){
-        cnt += dfs(next);
-      }
+        return cnt-1;
     }
-    return cnt;
-  }
-
-  public static void main(String[] args) throws Exception{
-    new Main().solution();
-  }
 }
