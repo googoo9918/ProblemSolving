@@ -1,64 +1,50 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class Main {
-  int T, M, N, K;
-  int[][] graph;
+    static int t, m, n, k, cnt=0;
+    static int[][] ground;
+    static int[] dx = new int[]{1,-1,0,0};
+    static int[] dy = new int[]{0,0,1,-1};
+    public static void main(String[] args) throws Exception{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        t = Integer.parseInt(br.readLine());
+        for(int i=0; i<t; i++){
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            m = Integer.parseInt(st.nextToken()); // 가로
+            n = Integer.parseInt(st.nextToken()); // 세로
+            k = Integer.parseInt(st.nextToken());
+            ground = new int[n][m];
+            for(int j=0; j<k; j++){
+                st = new StringTokenizer(br.readLine());
+                int y = Integer.parseInt(st.nextToken());
+                int x = Integer.parseInt(st.nextToken());
+                ground[x][y] = 1;
+            }
 
-  int[] dx = new int[]{0, 1, 0, -1};
-  int[] dy = new int[]{1, 0, -1, 0};
-  public void solution() throws Exception{
-    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    T = Integer.parseInt(br.readLine());
-    for(int i=0; i<T; i++){
-      StringTokenizer st = new StringTokenizer(br.readLine());
-      M = Integer.parseInt(st.nextToken());
-      N = Integer.parseInt(st.nextToken());
-      K = Integer.parseInt(st.nextToken());
-      graph = new int[N][M];
+            for(int i1=0; i1<n; i1++){
+                for(int j1=0; j1<m; j1++){
+                    if(ground[i1][j1] == 1){
+                        dfs(i1, j1);
+                        cnt++;
+                    }
+                }
+            }
 
-      for(int j=0; j<K; j++) {
-        st = new StringTokenizer(br.readLine());
-        int x = Integer.parseInt(st.nextToken());
-        int y = Integer.parseInt(st.nextToken());
-        graph[y][x] = 1;
-      }
-
-      int count = 0;
-      for(int j=0; j<N; j++){
-        for(int k=0; k<M; k++){
-          if(graph[j][k]==1){
-            count++;
-            bfs(j,k);
-          }
+            System.out.println(cnt);
+            cnt = 0;
         }
-      }
-      System.out.println(count);
     }
-  }
 
-  private int bfs(int y, int x) {
-    Queue<int[]> queue = new LinkedList<>();
-    queue.add(new int[]{y,x});
-    graph[y][x] = 0;
-    while (!queue.isEmpty()) {
-      int[] node = queue.poll();
-      for(int i=0; i<4; i++){
-        int nx = node[1] + dx[i];
-        int ny = node[0] + dy[i];
-        if(nx>=0 && nx<M && ny>=0 && ny<N && graph[ny][nx]==1){
-          queue.add(new int[]{ny,nx});
-          graph[ny][nx] = 0;
+    private static void dfs(int x, int y){
+        for(int i=0; i<4; i++){
+            int nx = x + dx[i];
+            int ny = y + dy[i];
+            if(nx >= 0 && ny >= 0 && nx < n && ny < m && ground[nx][ny] == 1){
+                ground[nx][ny] = 0;
+                dfs(nx, ny);
+            }
         }
-      }
     }
-    return 0;
-  }
-
-  public static void main(String[] args) throws Exception{
-    new Main().solution();
-  }
 }
