@@ -1,39 +1,36 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.StringTokenizer;
+import java.util.*;
 
-public class Main {
-  public void solution() throws Exception{
-    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    StringBuilder sb = new StringBuilder();
-    int n = Integer.parseInt(br.readLine());
-    List<int[]> list = new ArrayList<>();
-    for(int i=0; i<n; i++){
-      StringTokenizer st = new StringTokenizer(br.readLine());
-      int[] info = new int[2];
-      info[0] = Integer.parseInt(st.nextToken());
-      info[1] = Integer.parseInt(st.nextToken());
-      list.add(info);
+public class Main { //x -> y
+    public static void main(String[] args) throws Exception{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine());
+
+        List<int[]> list = new ArrayList<>();
+
+        for(int i=0; i<n; i++){
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            list.add(new int[]{Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken())});
+        }
+
+
+        Collections.sort(list, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] o1, int[] o2) {
+                if(o1[0] == o2[0]) return o1[1] - o2[1];
+                else return o1[0] - o2[0];
+            }
+        });
+
+        StringBuilder sb = new StringBuilder();
+        for(int[] i : list){
+            for(int j : i){
+                sb.append(j).append(" ");
+            }
+            sb.append("\n");
+        }
+
+        System.out.println(sb);
     }
-
-    Collections.sort(list, new Comparator<int[]>() {
-      @Override
-      public int compare(int[] i1, int[] i2){
-        if(i1[0] == i2[0]) return i1[1] - i2[1];
-        return i1[0] - i2[0];
-      }
-    });
-
-    for(int[] i : list){
-      sb.append(i[0]).append(" ").append(i[1]).append("\n");
-    }
-    System.out.print(sb);
-  }
-  public static void main(String[] args) throws Exception{
-    new Main().solution();
-  }
 }
