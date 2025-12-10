@@ -4,32 +4,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-    static boolean[] isVisited;
-    static List<Integer> list = new ArrayList<>();
+    static StringBuilder sb = new StringBuilder();
     static int n;
+    static List<Integer> list = new ArrayList<>();
+    static boolean[] isVisited;
     public static void main(String[] args) throws Exception{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         n = Integer.parseInt(br.readLine());
+
         isVisited = new boolean[n+1];
+
         dfs();
+        System.out.println(sb);
     }
 
-    private static void dfs() {
+    private static void dfs(){
         if(list.size() == n){
-            StringBuilder sb = new StringBuilder();
             for(int i : list){
                 sb.append(i).append(" ");
             }
-
-            System.out.println(sb);
+            sb.append("\n");
         }
 
         for(int i=1; i<=n; i++){
-            if(!isVisited[i]){
+            if (!isVisited[i]) {
                 isVisited[i] = true;
                 list.add(i);
                 dfs();
-                list.remove(list.size()-1);
+                list.remove(list.size() - 1);
                 isVisited[i] = false;
             }
         }
